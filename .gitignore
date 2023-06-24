@@ -1,5 +1,14 @@
 # Virtual Environments
 venv/
 .venv/
+
 # Local environment
 .env
+
+# optimised python bits
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
