@@ -11,6 +11,9 @@ langchain==0.0.212
 chromadb==0.3.26
 llama-cpp-python==0.1.65
 
+# Get lit, get streamlit!
+streamlit
+
 # Utilities
 python-dotenv
 requests
