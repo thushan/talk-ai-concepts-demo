@@ -76,8 +76,8 @@ speech2 = text2speech(narrative2, DEFAULT_MODELS["tts1"])
 writeFile(speech1, "output/people-guitar.flac")
 writeFile(speech2, "output/david-tony.flac")
 
-console.printInfoCyan("IMAGE:", "people-guitar-campfire.jpeg")
-console.printInfoCyan("TEXT: ",text1)
+console.printInfoCyan("IMAGE: ", "people-guitar-campfire.jpeg")
+console.printInfoMagenta("TEXT: ",text1)
 console.printInfoYellow("NARRATIVE: ", narrative1)
 print("--------")
 console.printInfoCyan("IMAGE:", "david-showing-tony.jpg")
@@ -85,6 +85,8 @@ console.printInfoMagenta("TEXT: ",text2)
 console.printInfoYellow("NARRATIVE: ", narrative2)
 
 """
+Examples (OpenAI)
+==========
 1:
 TEXT: there are many people sitting around a campfire playing guitar
 NARRATIVE: As they strummed their guitars, they shared tales of their travels, their loves, and their fears, the flames dancing to the rhythm of their songs.
