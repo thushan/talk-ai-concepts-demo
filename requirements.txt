@@ -1,1 +1,16 @@
-python-dotenv==1.0.0
+# Core
+torch
+pillow
+duckdb
+openai
+transformers
+beautifulsoup4
+huggingface-hub
+langchain==0.0.212
+chromadb==0.3.26
+llama-cpp-python==0.1.65
+
+# Utilities
+python-dotenv
+requests
+colorama

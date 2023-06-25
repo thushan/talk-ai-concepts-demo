@@ -6,6 +6,16 @@ Demos for the talk on Introduction to AI & HuggingFace.
 
 The demos are written in Python and outside of ensuring you have the latest python installed, you can setup a virtual environment and install the dependencies for all demos easily by following the notes below.
 
+## Setup Tensorflow and/or Pytorch
+
+For some demos, it's vital that Pytorch or Tensorflow is correctly installed on your machine - based on available hardware.
+
+### with NVIDIA CUDA
+
+### with Apple Silicon
+
+### with CPU only
+
 ## Create Python Virtual Environment
 
 First we want to create a virtal environment for the dependencies:
