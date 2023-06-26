@@ -10,8 +10,6 @@ from utilities import console
 
 load_dotenv(find_dotenv())
 
-
-
 text1 = core.image2text("samples/people-guitar-campfire.jpeg", core.DEFAULT_MODELS["image"])
 text2 = core.image2text("samples/david-showing-tony.jpg", core.DEFAULT_MODELS["image"])
 
@@ -20,6 +18,8 @@ narrative2 = core.text2narrative_huggingface(text2, core.PROMPT_TEMPLATE_GPT2_GE
 
 #narrative1_openai = core.text2narrative_openai(text1)
 #narrative2_openai = core.text2narrative_openai(text2)
+#narrative1 = narrative1_openai
+#narrative2 = narrative2_openai
 
 speech1 = core.text2speech(narrative1, core.DEFAULT_MODELS["tts1"])
 speech2 = core.text2speech(narrative2, core.DEFAULT_MODELS["tts1"])
