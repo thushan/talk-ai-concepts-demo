@@ -10,7 +10,7 @@ huggingface-hub
 langchain==0.0.212
 chromadb==0.3.26
 llama-cpp-python==0.1.65
-
+tiktoken
 # Get lit, get streamlit!
 streamlit
 
