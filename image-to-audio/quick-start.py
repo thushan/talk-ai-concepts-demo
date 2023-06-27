@@ -11,14 +11,20 @@ from utilities import console
 
 load_dotenv(find_dotenv())
 
-def convert(filename, story_prompt, use_openai = False, model_image = core.DEFAULT_MODELS["image"], model_story = core.DEFAULT_MODELS["story"], model_speech = core.DEFAULT_MODELS["tts1"]):
+def convert(filename, story_prompt, use_openai = False,
+            model_image = core.DEFAULT_MODELS["image"],
+            model_story = core.DEFAULT_MODELS["story"],
+            model_txt2s = core.DEFAULT_MODELS["tts1"]):
+
     outputFilename = "output/"+ Path(filename).stem + ".flac";
     text = core.image2text(filename, model_image)
+
     if use_openai == True:
         narrative = core.text2narrative_openai(text)
     else:
         narrative = core.text2narrative_huggingface(text, story_prompt, model_story)
-    speech = core.text2speech(narrative, model_speech)
+
+    speech = core.text2speech(narrative, model_txt2s)
     core.writeFile(speech, outputFilename)
 
     console.printInfoCyan("IMAGE: ", filename)
