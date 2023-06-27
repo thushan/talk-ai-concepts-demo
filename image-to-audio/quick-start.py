@@ -1,6 +1,7 @@
 import os
 import sys
 import core
+from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -10,32 +11,24 @@ from utilities import console
 
 load_dotenv(find_dotenv())
 
-text1 = core.image2text("samples/people-guitar-campfire.jpeg", core.DEFAULT_MODELS["image"])
-text2 = core.image2text("samples/david-showing-tony.jpg", core.DEFAULT_MODELS["image"])
+def convert(filename, story_prompt, use_openai = False, model_image = core.DEFAULT_MODELS["image"], model_story = core.DEFAULT_MODELS["story"], model_speech = core.DEFAULT_MODELS["tts1"]):
+    outputFilename = "output/"+ Path(filename).stem + ".flac";
+    text = core.image2text(filename, model_image)
+    if use_openai == True:
+        narrative = core.text2narrative_openai(text)
+    else:
+        narrative = core.text2narrative_huggingface(text, story_prompt, model_story)
+    speech = core.text2speech(narrative, model_speech)
+    core.writeFile(speech, outputFilename)
 
-narrative1 = core.text2narrative_huggingface(text1, core.PROMPT_TEMPLATE_GPT2_GENRE_THRILLER, core.DEFAULT_MODELS["story"])
-narrative2 = core.text2narrative_huggingface(text2, core.PROMPT_TEMPLATE_GPT2_GENRE_SUPERHERO, core.DEFAULT_MODELS["story"])
+    console.printInfoCyan("IMAGE: ", filename)
+    console.printInfoMagenta("TEXT: ",text)
+    console.printInfoYellow("OpenAI: ", str(use_openai))
+    console.printInfoYellow("NARRATIVE: ", narrative)
+    console.printFileSize("AUDIO_OUT: ", outputFilename)
 
-#narrative1_openai = core.text2narrative_openai(text1)
-#narrative2_openai = core.text2narrative_openai(text2)
-#narrative1 = narrative1_openai
-#narrative2 = narrative2_openai
-
-speech1 = core.text2speech(narrative1, core.DEFAULT_MODELS["tts1"])
-speech2 = core.text2speech(narrative2, core.DEFAULT_MODELS["tts1"])
-
-core.writeFile(speech1, "output/people-guitar.flac")
-core.writeFile(speech2, "output/david-tony.flac")
-
-console.printInfoCyan("IMAGE: ", "people-guitar-campfire.jpeg")
-console.printInfoMagenta("TEXT: ",text1)
-console.printInfoYellow("NARRATIVE: ", narrative1)
-console.printFileSize("AUDIO_OUT: ", "output/people-guitar.flac")
-print("--------")
-console.printInfoCyan("IMAGE: ", "david-showing-tony.jpg")
-console.printInfoMagenta("TEXT: ",text2)
-console.printInfoYellow("NARRATIVE: ", narrative2)
-console.printFileSize("AUDIO_OUT: ", "output/david-tony.flac")
+convert("samples/people-guitar-campfire.jpeg", core.PROMPT_TEMPLATE_GPT2_GENRE_THRILLER)
+convert("samples/david-showing-tony.jpg", core.PROMPT_TEMPLATE_GPT2_GENRE_SUPERHERO)
 
 """
 Examples (OpenAI)
